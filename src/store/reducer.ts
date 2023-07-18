@@ -15,6 +15,8 @@ export const reducer = (state: StateType, action: ActionType): StateType => {
       };
     case 'error':
       return { ...state, status: 'error' };
+    case 'start':
+      return { ...state, status: 'active' };
     default:
       return initState;
   }

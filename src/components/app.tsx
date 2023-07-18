@@ -7,6 +7,7 @@ import Loader from './Loader';
 import { API_URL } from '../const';
 import { QuestionsType } from '../types/types';
 import StartScreen from './start-screen';
+import Question from './question';
 
 export default function App() {
   const [{ status, questions }, dispatch] = useReducer(reducer, initState);
@@ -30,7 +31,8 @@ export default function App() {
       <Main>
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
-        {status === 'ready' && <StartScreen numQuestions={questions.length} />}
+        {status === 'ready' && <StartScreen dispatch={dispatch} numQuestions={questions.length} />}
+        {status === 'active' && <Question />}
       </Main>
     </div>
   );
