@@ -1,9 +1,10 @@
 export type StateType = {
-  questions: QuestionsType[];
+  questions: QuestionType[];
   status: string;
+  index: number;
 };
 
-export type QuestionsType = {
+export type QuestionType = {
   question: string;
   options: string[];
   correctOption: number;
@@ -12,5 +13,5 @@ export type QuestionsType = {
 
 export type ActionType = {
   type: string;
-  payload?: string | QuestionsType[];
+  payload?: string | QuestionType[];
 };

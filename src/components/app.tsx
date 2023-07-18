@@ -5,12 +5,13 @@ import { initState, reducer } from '../store/reducer';
 import Error from './Error';
 import Loader from './Loader';
 import { API_URL } from '../const';
-import { QuestionsType } from '../types/types';
+import { QuestionType } from '../types/types';
 import StartScreen from './start-screen';
 import Question from './question';
 
 export default function App() {
-  const [{ status, questions }, dispatch] = useReducer(reducer, initState);
+  const [{ status, questions, index }, dispatch] = useReducer(reducer, initState);
+  const currentQuestion = questions[index];
 
   useEffect(() => {
     fetch(API_URL)
@@ -21,7 +22,7 @@ export default function App() {
         return res.json();
       })
       .then((res) =>
-        dispatch({ type: 'dataReceived', payload: res as QuestionsType[] })
+        dispatch({ type: 'dataReceived', payload: res as QuestionType[] })
       )
       .catch((e) => dispatch({ type: 'error' }));
   }, []);
@@ -32,7 +33,7 @@ export default function App() {
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
         {status === 'ready' && <StartScreen dispatch={dispatch} numQuestions={questions.length} />}
-        {status === 'active' && <Question />}
+        {status === 'active' && <Question question={currentQuestion} />}
       </Main>
     </div>
   );
