@@ -10,7 +10,7 @@ import StartScreen from './start-screen';
 import Question from './question';
 
 export default function App() {
-  const [{ status, questions, index }, dispatch] = useReducer(reducer, initState);
+  const [{ status, questions, index, answer }, dispatch] = useReducer(reducer, initState);
   const currentQuestion = questions[index];
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function App() {
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
         {status === 'ready' && <StartScreen dispatch={dispatch} numQuestions={questions.length} />}
-        {status === 'active' && <Question question={currentQuestion} />}
+        {status === 'active' && <Question dispatch={dispatch} answer={answer} question={currentQuestion} />}
       </Main>
     </div>
   );
