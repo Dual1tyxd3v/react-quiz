@@ -20,7 +20,7 @@ export const reducer = (state: StateType, action: ActionType): StateType => {
       return { ...state, status: 'error' };
     case 'start':
       return { ...state, status: 'active' };
-    case 'newAnswer':
+    case 'newAnswer': {
       const currQuestion = state.questions[state.index];
       return {
         ...state,
@@ -30,6 +30,7 @@ export const reducer = (state: StateType, action: ActionType): StateType => {
             ? state.points + currQuestion.points
             : state.points,
       };
+    }
     default:
       return initState;
   }
