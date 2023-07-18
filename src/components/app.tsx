@@ -6,10 +6,10 @@ import Error from './Error';
 import Loader from './Loader';
 import { API_URL } from '../const';
 import { QuestionsType } from '../types/types';
+import StartScreen from './start-screen';
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initState);
-  const { status, questions } = state;
+  const [{ status, questions }, dispatch] = useReducer(reducer, initState);
 
   useEffect(() => {
     fetch(API_URL)
@@ -30,7 +30,7 @@ export default function App() {
       <Main>
         {status === 'loading' && <Loader />}
         {status === 'error' && <Error />}
-        {status === 'ready' && <p>{questions.length}</p>}
+        {status === 'ready' && <StartScreen numQuestions={questions.length} />}
       </Main>
     </div>
   );
