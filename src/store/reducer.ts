@@ -31,6 +31,8 @@ export const reducer = (state: StateType, action: ActionType): StateType => {
             : state.points,
       };
     }
+    case 'nextQuestion':
+      return {...state, answer: null, index: state.index + 1};
     default:
       return initState;
   }
