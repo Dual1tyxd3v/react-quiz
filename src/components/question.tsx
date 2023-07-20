@@ -1,6 +1,7 @@
 import { ActionType, QuestionType } from '../types/types';
 import Button from './button';
 import Options from './options';
+import Timer from './timer';
 
 type QuestionProps = {
   question: QuestionType;
@@ -23,9 +24,16 @@ export default function Question({
         <h4>{question.question}</h4>
         <Options answer={answer} dispatch={dispatch} question={question} />
       </div>
-      {answer !== null && (
-        <Button dispatch={dispatch} index={index} numQuestions={numQuestions} />
-      )}
+      <footer>
+        <Timer dispatch={dispatch} />
+        {answer !== null && (
+          <Button
+            dispatch={dispatch}
+            index={index}
+            numQuestions={numQuestions}
+          />
+        )}
+      </footer>
     </>
   );
 }
