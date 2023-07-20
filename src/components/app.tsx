@@ -8,13 +8,16 @@ import { API_URL } from '../const';
 import { QuestionType } from '../types/types';
 import StartScreen from './start-screen';
 import Question from './question';
+import Progress from './progress';
 
 export default function App() {
-  const [{ status, questions, index, answer }, dispatch] = useReducer(
+  const [{ status, questions, index, answer, points }, dispatch] = useReducer(
     reducer,
     initState
   );
   const currentQuestion = questions[index];
+  const numQuestions = questions.length;
+  const maxPoints = questions.reduce((acc, ques) => acc + ques.points, 0);
 
   useEffect(() => {
     fetch(API_URL)
@@ -39,11 +42,20 @@ export default function App() {
           <StartScreen dispatch={dispatch} numQuestions={questions.length} />
         )}
         {status === 'active' && (
-          <Question
-            dispatch={dispatch}
-            answer={answer}
-            question={currentQuestion}
-          />
+          <>
+            <Progress
+              points={points}
+              index={index}
+              answer={answer}
+              numQuestions={numQuestions}
+              maxPoints={maxPoints}
+            />
+            <Question
+              dispatch={dispatch}
+              answer={answer}
+              question={currentQuestion}
+            />
+          </>
         )}
       </Main>
     </div>
