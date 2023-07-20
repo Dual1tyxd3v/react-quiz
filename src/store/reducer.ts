@@ -41,6 +41,8 @@ export const reducer = (state: StateType, action: ActionType): StateType => {
         highscore:
           state.highscore > state.points ? state.highscore : state.points,
       };
+    case 'reset':
+      return { ...initState, highscore: state.highscore, status: 'ready', questions: state.questions };
     default:
       return initState;
   }
