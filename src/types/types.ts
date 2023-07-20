@@ -4,6 +4,7 @@ export type StateType = {
   index: number;
   answer: null | number;
   points: number;
+  highscore: number;
 };
 
 export type QuestionType = {

@@ -6,6 +6,7 @@ export const initState = {
   index: 0,
   answer: null,
   points: 0,
+  highscore: 0,
 };
 
 export const reducer = (state: StateType, action: ActionType): StateType => {
@@ -32,7 +33,14 @@ export const reducer = (state: StateType, action: ActionType): StateType => {
       };
     }
     case 'nextQuestion':
-      return {...state, answer: null, index: state.index + 1};
+      return { ...state, answer: null, index: state.index + 1 };
+    case 'finish':
+      return {
+        ...state,
+        status: 'finished',
+        highscore:
+          state.highscore > state.points ? state.highscore : state.points,
+      };
     default:
       return initState;
   }

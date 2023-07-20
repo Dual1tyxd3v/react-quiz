@@ -9,12 +9,11 @@ import { QuestionType } from '../types/types';
 import StartScreen from './start-screen';
 import Question from './question';
 import Progress from './progress';
+import FinishScreen from './finish-screen';
 
 export default function App() {
-  const [{ status, questions, index, answer, points }, dispatch] = useReducer(
-    reducer,
-    initState
-  );
+  const [{ status, questions, index, answer, points, highscore }, dispatch] =
+    useReducer(reducer, initState);
   const currentQuestion = questions[index];
   const numQuestions = questions.length;
   const maxPoints = questions.reduce((acc, ques) => acc + ques.points, 0);
@@ -45,8 +44,8 @@ export default function App() {
           <>
             <Progress
               points={points}
-              index={index}
               answer={answer}
+              index={index}
               numQuestions={numQuestions}
               maxPoints={maxPoints}
             />
@@ -54,8 +53,17 @@ export default function App() {
               dispatch={dispatch}
               answer={answer}
               question={currentQuestion}
+              index={index}
+              numQuestions={numQuestions}
             />
           </>
+        )}
+        {status === 'finished' && (
+          <FinishScreen
+            points={points}
+            highscore={highscore}
+            maxPoints={maxPoints}
+          />
         )}
       </Main>
     </div>
