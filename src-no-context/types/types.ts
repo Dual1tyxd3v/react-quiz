@@ -18,16 +18,3 @@ export type ActionType = {
   type: string;
   payload?: string | QuestionType[] | number;
 };
-
-export type QuizContextType = {
-  points: number;
-  dispatch: React.Dispatch<ActionType>;
-  status: string;
-  questions: QuestionType[];
-  answer: null | number;
-  index: number;
-  numQuestions: number;
-  maxPoints: number;
-  highscore: number;
-  currentQuestion: QuestionType;
-};

@@ -1,7 +1,12 @@
-import { useQuiz } from '../contexts/quiz-context';
+import { ActionType } from '../types/types';
 
-export default function Button() {
-  const { dispatch, index, numQuestions } = useQuiz();
+type ButtonProps = {
+  dispatch: React.Dispatch<ActionType>;
+  index: number;
+  numQuestions: number;
+};
+
+export default function Button({ dispatch, index, numQuestions }: ButtonProps) {
   if (index === numQuestions - 1) {
     return (
       <button

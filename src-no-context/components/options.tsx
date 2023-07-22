@@ -1,11 +1,12 @@
-import { useQuiz } from '../contexts/quiz-context';
+import { ActionType, QuestionType } from '../types/types';
 
 type OptionsProps = {
+  question: QuestionType;
+  dispatch: React.Dispatch<ActionType>;
   answer: null | number;
 };
 
-export default function Options({ answer }: OptionsProps) {
-  const { currentQuestion: question, dispatch } = useQuiz();
+export default function Options({ question, dispatch, answer }: OptionsProps) {
   return (
     <div className="options">
       {question.options.map((option, i) => {

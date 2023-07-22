@@ -1,15 +1,18 @@
 import { useEffect, useState } from 'react';
 import { QUIZ_TIME } from '../const';
 import { formatTime } from '../utils';
-import { useQuiz } from '../contexts/quiz-context';
+import { ActionType } from '../types/types';
 
-export default function Timer() {
+type TimerProps = {
+  dispatch: React.Dispatch<ActionType>;
+}
+
+export default function Timer({dispatch}: TimerProps) {
   const [time, setTime] = useState(QUIZ_TIME);
   const formattedTime = formatTime(time);
-  const { dispatch } = useQuiz();
 
-  if (time === 0) {
-    dispatch({ type: 'finish' });
+  if(time === 0) {
+    dispatch({type: 'finish'});
   }
 
   useEffect(() => {
